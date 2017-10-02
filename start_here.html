@@ -1,0 +1,87 @@
+<html>
+    <head>
+        <link rel="icon" type="image/x-icon" href="./favicon.png">
+
+        <script id="vertex-shader" type="x-shader/x-vertex">
+            attribute vec4 vPosition;
+            attribute vec4 vColor;
+            uniform   mat4 uProjection; // projection matrix
+            uniform   mat4 uModel_view; // model view matrix
+            
+            varying vec4 color;  // not used at the moment
+            
+            void main() 
+            {
+                color = vColor;  // not used at the moment
+                gl_Position = uProjection * uModel_view * vPosition;
+            } 
+
+        </script>
+
+        <script id="fragment-shader" type="x-shader/x-fragment">
+            precision mediump float;
+
+            uniform vec4 uColor;
+
+            void
+            main()
+            {
+                 gl_FragColor = uColor;
+            }
+
+        </script>
+
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <script type="text/javascript" src="Common/webgl-utils.js"></script>
+        <script type="text/javascript" src="Common/initShaders.js"></script>
+        <script type="text/javascript" src="eventHandlers.js"></script> 
+        <script type="text/javascript" src="Common/MV.js"></script>
+        <script type="text/javascript" src="Common/MatrixStack.js"></script>
+        <script type="text/javascript" src="geometry/Cylinder.js"></script>
+        <script type="text/javascript" src ="geometry/Cone.js"></script>
+        <script type ="text/javascript" src="geometry/Disc.js"></script>
+        <script type="text/javascript" src="geometry/Cube.js"></script>
+        <script type ="text/javascript" src="Robot.js"></script>
+        <script type="text/javascript" src="geometry/Axis.js"></script>
+        <script type="text/javascript" src="geometry/Shapes.js"></script>
+        <script type="text/javascript" src="Camera.js"></script>
+        <script type="text/javascript" src="render_scene.js"></script>
+        
+
+    </head>
+    <body>
+
+        <h2> Lab 4: Navigation</h2>
+        <table>
+            <tr>
+                <td>
+                    <canvas id="gl-canvas" width="512" height="512" oncontextmenu="return false;">   
+                        Oops ... your browser doesn't support the HTML5 canvas element
+                    </canvas>
+
+
+                </td>
+                <td >
+                    <div style = "background-color: LightGray">
+                        <p> Keyboard Controls:</p>
+                        <ul>
+                            <li>[r] ........ reset parameters</li> 
+                            <li>[q/a] ........ move forward/backward</li> 
+                            <li>[w/e] ........ turn left/right</li> 
+                            <li>[s/d] ........ turn up/down</li> 
+                            <li>[x/c] ........ roll left/right</li> 
+                        </ul>
+                        <p> Mouse Controls:</p>
+                        <ul>
+                            <li>[Right Mouse drag] ... pan up/down/left/right</li> 
+                            <li>[Middle Mouse drag] .. zoom in/out</li> 
+                            <li>[Middle Mouse wheel] . zoom in/out</li> 
+                            <li>[Left Mouse drag] .... tumble about origin</li> 
+                        </ul> </div>
+                    <div id="keypress"><b>Key pressed:</b> </div>
+                    <div id="mouseAction"><b>Action:</b> </div>
+                    <div id="mouseState"><b>Mouse State:</b></div>  
+                </td> </tr>
+        </table>
+    </body>
+</html>
